@@ -1,0 +1,15 @@
+<?php>
+// EDIT ACCOUNT DETAILS $x_username = ""; $x_apikey = "";
+// EDIT MESSAGE PARAMS $createMessage = array( "phoneNumbers" => "+254711xxxxxx,+41785xxxx", 
+// multiple contacts comma separated "message" => "It's song and dance until someone does rm -rf music", "senderId" => "" 
+// default value is Ionsolve ); // message endoint $messageHost = "https://bulksmsit.co.ke/sms/api/send";
+// encoding params $params = json_encode($createMessage); $req = curl_init($messageHost); 
+curl_setopt($req, CURLOPT_CUSTOMREQUEST, "POST"); curl_setopt($req, CURLOPT_TIMEOUT, 60); 
+curl_setopt($req, CURLOPT_SSL_VERIFYPEER, FALSE); curl_setopt($req, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($req, CURLOPT_POSTFIELDS, $params); curl_setopt($req,
+CURLOPT_HTTPHEADER, array( 'Content-Type: application/json', 'Content-Length: '.strlen($params),
+'x-api-user: '.$x_username, 'x-api-key: '.$x_apikey )); 
+// read api response $res = curl_exec($req); 
+// close curl curl_close($req);
+// print the json response var_dump($res);
+}
